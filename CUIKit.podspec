@@ -20,9 +20,9 @@ spec.source = {
     :tag => spec.version.to_s
 }
 spec.frameworks = "UIKit"
-spec.source_files = "CUIKit/Sources/**/*.swift"
+spec.source_files = "Sources/**/*.swift"
 spec.resource_bundles = {
-  'CUIKit' => ['CUIKit/Sources/**/*.{xib,xcassets,imageset}']
+  'CUIKit' => ['Sources/**/*.{xib,xcassets,imageset}']
 }
 spec.pod_target_xcconfig = { "SWIFT_VERSION" => "5", 'APPLICATION_EXTENSION_API_ONLY' => 'YES', 'ONLY_ACTIVE_ARCH' => 'NO' }
 end
