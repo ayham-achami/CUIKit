@@ -17,7 +17,7 @@ spec.swift_version = "5"
 
 spec.source = {
     :git => "git@github.com:ayham-achami/CUIKit.git",
-    :tag => s.version.to_s
+    :tag => spec.version.to_s
 }
 spec.frameworks = "UIKit"
 spec.source_files = "CUIKit/Sources/**/*.swift"
