@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B63523D2EADBDCFF906B5EE6 /* Pods_CUIKit_CUIKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FD75D1043D86D4DFE9D636 /* Pods_CUIKit_CUIKitTests.framework */; };
+		C9F2655827BA71A20070368C /* CompositionalDisplayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F2655727BA71A20070368C /* CompositionalDisplayItem.swift */; };
 		CF69920F26D65595008E299F /* CUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF69920526D65595008E299F /* CUIKit.framework */; };
 		CF69922226D655C5008E299F /* CUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CF69922026D655C5008E299F /* CUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF69922B26D65636008E299F /* CUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF69922526D655CE008E299F /* CUIKitTests.swift */; };
@@ -73,6 +74,7 @@
 		B075F9B271A4DCD8CB6603A2 /* Pods_CUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEEC25E4AC7B9E6E5008805 /* Pods-CUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CUIKit.release.xcconfig"; path = "Target Support Files/Pods-CUIKit/Pods-CUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		C760D8D4C3E7684959FEC689 /* Pods-CUIKit-CUIKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CUIKit-CUIKitTests.release.xcconfig"; path = "Target Support Files/Pods-CUIKit-CUIKitTests/Pods-CUIKit-CUIKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		C9F2655727BA71A20070368C /* CompositionalDisplayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionalDisplayItem.swift; sourceTree = "<group>"; };
 		CF69920526D65595008E299F /* CUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF69920E26D65595008E299F /* CUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF69922026D655C5008E299F /* CUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUIKit.h; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				CF69926E26D6588F008E299F /* ProgressLayout.swift */,
 				CF69926F26D6588F008E299F /* ColumnFlowLayout.swift */,
 				CF69926A26D6588F008E299F /* RearrangeableCollectionViewLayout.swift */,
+				C9F2655727BA71A20070368C /* CompositionalDisplayItem.swift */,
 				CF69926B26D6588F008E299F /* ColumnFlowLayouts */,
 			);
 			path = CollectionViewLayout;
@@ -592,6 +595,7 @@
 				CF6992B926D65890008E299F /* StateView.swift in Sources */,
 				CF69929126D6588F008E299F /* PhoneTextField.swift in Sources */,
 				CF6992B326D65890008E299F /* UIModel.swift in Sources */,
+				C9F2655827BA71A20070368C /* CompositionalDisplayItem.swift in Sources */,
 				CF69929526D6588F008E299F /* Designable.swift in Sources */,
 				CF69929426D6588F008E299F /* DesignableImageView.swift in Sources */,
 				DF1B8C6D279198B100036669 /* Animations.swift in Sources */,
