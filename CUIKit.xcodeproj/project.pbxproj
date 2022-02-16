@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000900FE27BC006800F5A2B7 /* StateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000900FC27BC006800F5A2B7 /* StateView.xib */; };
 		B63523D2EADBDCFF906B5EE6 /* Pods_CUIKit_CUIKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FD75D1043D86D4DFE9D636 /* Pods_CUIKit_CUIKitTests.framework */; };
 		C9F2655827BA71A20070368C /* CompositionalDisplayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F2655727BA71A20070368C /* CompositionalDisplayItem.swift */; };
 		CF69920F26D65595008E299F /* CUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF69920526D65595008E299F /* CUIKit.framework */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		000900FC27BC006800F5A2B7 /* StateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateView.xib; sourceTree = "<group>"; };
 		14E9B58DBB767D0BE281C874 /* Pods-CUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CUIKit.debug.xcconfig"; path = "Target Support Files/Pods-CUIKit/Pods-CUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		15AF348C206D106005EA31F2 /* Pods-CUIKit-CUIKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CUIKit-CUIKitTests.debug.xcconfig"; path = "Target Support Files/Pods-CUIKit-CUIKitTests/Pods-CUIKit-CUIKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		39FD75D1043D86D4DFE9D636 /* Pods_CUIKit_CUIKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CUIKit_CUIKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +152,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000900FA27BBFFFF00F5A2B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				000900FC27BC006800F5A2B7 /* StateView.xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		55392D1717C50B77132EB0FD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +204,7 @@
 		CF69921F26D655C5008E299F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				000900FA27BBFFFF00F5A2B7 /* Resources */,
 				CF69926926D6588F008E299F /* CollectionViewLayout */,
 				CF69923A26D6588F008E299F /* Pin */,
 				CF69924426D6588F008E299F /* Progress */,
@@ -478,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF1B8C7827919CF400036669 /* .swiftlint.yml in Resources */,
+				000900FE27BC006800F5A2B7 /* StateView.xib in Resources */,
 				DF1B8C7727919CF400036669 /* CUIKit.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
