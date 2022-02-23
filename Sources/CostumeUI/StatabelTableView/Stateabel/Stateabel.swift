@@ -34,18 +34,14 @@ public protocol StateabelDataSource: AnyObject {
 
     /// вызывается при запросе индикатор загрузки, по умолчанию используется `UIActivityIndicatorView`
     /// - Parameter stateabelView: объект создающий запрос
-    func lodaionView<StateabelView>(for stateabelView: StateabelView) -> ActivityView where StateabelView: Stateabel
+    func loadingView<StateabelView>(for stateabelView: StateabelView) -> ActivityView where StateabelView: Stateabel
 }
 
 // MARK: - StateabelDataSource + Default
 public extension StateabelDataSource {
 
-    func lodaionView<StateabelView>(for stateabelView: StateabelView) -> ActivityView where StateabelView: Stateabel {
-        if #available(iOS 13.0, *) {
-            return UIActivityIndicatorView(style: .medium)
-        } else {
-            return UIActivityIndicatorView(style: .gray)
-        }
+    func loadingView<StateabelView>(for stateabelView: StateabelView) -> ActivityView where StateabelView: Stateabel {
+        UIActivityIndicatorView(style: .medium)
     }
 }
 
@@ -136,7 +132,7 @@ public extension Stateabel where Self: UIScrollView & StateViewDelegate {
         if let delegate = stateDelegate {
             stateView.tintColor = delegate.statetableView(self, tintColorFor: state.case)
         }
-        stateView.update(with: state, activityView: dataSource.lodaionView(for: self))
+        stateView.update(with: state, activityView: dataSource.loadingView(for: self))
         stateDelegate?.statetableView(self, didBecomeActiveFor: state.case)
         UIView.animate(withDuration: 0.5) { self.stateView.alpha = 1 }
         isScrollEnabled = false
@@ -178,7 +174,7 @@ public extension Stateabel where Self: UIViewController & StateViewDelegate {
         if let delegate = stateDelegate {
             stateView.tintColor = delegate.statetableView(self, tintColorFor: state.case)
         }
-        stateView.update(with: state, activityView: dataSource.lodaionView(for: self))
+        stateView.update(with: state, activityView: dataSource.loadingView(for: self))
         stateDelegate?.statetableView(self, didBecomeActiveFor: state.case)
         UIView.animate(withDuration: 0.5) { self.stateView.alpha = 1 }
     }
