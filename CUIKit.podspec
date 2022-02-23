@@ -8,7 +8,7 @@ spec.description  = <<-DESC
 DESC
 
 spec.license      = { :type => "MIT", :file => "LICENSE" }
-spec.author       = { "Ayham Hylam" => "Ayham Hylam" }
+spec.author       = { "Ayham Hylam" => "ayham_achami@hotmail.com" }
 spec.homepage     = "https://github.com/ayham-achami/CUIKit.git"
 
 spec.social_media_url = ""
@@ -16,7 +16,7 @@ spec.ios.deployment_target = "13.0"
 spec.swift_version = "5"
 
 spec.source = {
-    :git => "git@github.com:ayham-achami/CUIKit.git",
+    :git => "https://github.com/ayham-achami/CUIKit.git",
     :tag => spec.version.to_s
 }
 spec.frameworks = "UIKit"
