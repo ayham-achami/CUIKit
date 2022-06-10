@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "CUIKit",
-    platforms: [.iOS(.v11)],
+    platforms: [.iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -18,22 +18,15 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CUIKit",
-            dependencies: [],
-            path: "CUIKit/Sources",
+            path: "Sources",
             exclude: ["Info.plist"],
-            resources: [
-                .copy("Sources/Resources")
-            ], 
             swiftSettings: [
                     .define("SPM")
                   ]),
         .testTarget(
             name: "CUIKitTests",
             dependencies: ["CUIKit"],
-            path: "CUIKit/Tests",
-            exclude: ["Info.plist"],
-            resources: [
-                .copy("Sources/Resources")
-            ])
+            path: "CUIKitTests",
+            exclude: ["Info.plist"])
     ]
 )
