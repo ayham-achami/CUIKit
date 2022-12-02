@@ -213,9 +213,9 @@ public extension UICollectionView {
     /// - Parameters:
     ///   - factory: фабрика ячейки (объект содержащий бизнес логику заполнения ячейки)
     ///   - elementKind: вид дополнительного представления для создания.
-    func register(factory: AnyViewFactory.Type, forSupplementaryViewOfKind elementKind: String) {
+    func register(factory: AnyViewFactory.Type, forSupplementaryViewOfKind elementKind: String, bundle: Bundle? = nil) {
         let viewName = String(describing: factory.wrappedViewType)
-        let nib = UINib(nibName: viewName, bundle: nil)
+        let nib = UINib(nibName: viewName, bundle: bundle)
         register(nib, forSupplementaryViewOfKind: elementKind, withReuseIdentifier: viewName)
     }
 }
