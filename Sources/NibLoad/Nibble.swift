@@ -60,7 +60,7 @@ public extension Nibble where Self: UIView {
 
     @discardableResult
     func nibIntervene<View>() -> View? where View: UIView {
-        let bundle = Bundle(for: View.self)
+        let bundle = Bundle.module
         guard let view = bundle.loadNibNamed(String(describing: View.self),
                                              owner: self,
                                              options: nil)?.first as? View else { return nil }
@@ -70,28 +70,7 @@ public extension Nibble where Self: UIView {
 
     static func fabricate() -> Self? {
         let nibName = String(describing: Self.self)
-        let bundle = Bundle(for: Self.self)
-        return bundle.loadNibNamed(nibName, owner: nil, options: nil)?.first as? Self
-    }
-
-    /// Загрузка опредленного типа view через nib из локального ресурса
-    ///
-    /// - Returns: загруженная view
-    static func fabricateFromFrameworkBundle() -> Self? {
-        let nibName = String(describing: Self.self)
-        let frameworkBundle = Bundle(for: Self.self)
-        #if SPM
-        let bundleName = "CUIKit_CUIKit"
-        #else
-        let bundleName = "CUIKit"
-        #endif
-        guard let bundleURL = frameworkBundle.url(forResource: bundleName, withExtension: "bundle") else {
-            preconditionFailure("Could not create a path to the CUIKit framework bundle")
-        }
-        guard let bundle = Bundle(url: bundleURL) else {
-            preconditionFailure("Could not load the CUIKit framework bundle")
-        }
-
+        let bundle = Bundle.module
         return bundle.loadNibNamed(nibName, owner: nil, options: nil)?.first as? Self
     }
 }

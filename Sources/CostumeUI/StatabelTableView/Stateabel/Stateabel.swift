@@ -103,7 +103,7 @@ public extension Stateabel where Self: UIScrollView & StateViewDelegate {
     var stateView: StateView {
         if let stateView = subviews.first(where: { $0 is StateView }) as? StateView {
             return stateView
-        } else if let stateView = StateView.fabricateFromFrameworkBundle() {
+        } else if let stateView = StateView.fabricate() {
             stateView.backgroundColor = backgroundColor
             stateView.delegate = self
             return stateView
@@ -145,7 +145,7 @@ public extension Stateabel where Self: UIViewController & StateViewDelegate {
     var stateView: StateView {
         if let stateView = view.subviews.first(where: { $0 is StateView }) as? StateView {
             return stateView
-        } else if let stateView = StateView.fabricateFromFrameworkBundle() {
+        } else if let stateView = StateView.fabricate() {
             stateView.backgroundColor = view.backgroundColor
             stateView.delegate = self
             return stateView
