@@ -49,10 +49,15 @@ public protocol Nibble: AnyObject {
     @discardableResult
     func nibIntervene<View>() -> View? where View: UIView
 
-    /// Загрузка опредленного типа view через nib
+    /// Загрузка опредленного типа view через nib из бандла основного приложения
     ///
     /// - Returns: загруженная view
-    static func fabricate() -> Self?
+    static func fabricateFromAppBundle() -> Self?
+    
+    /// Загрузка опредленного типа view через nib из локального ресурса
+    ///
+    /// - Returns: загруженная view
+    static func fabricateFromFrameworkBundle() -> Self?
 }
 
 // MARK: - Nibble + UIView
@@ -72,24 +77,18 @@ public extension Nibble where Self: UIView {
         return view
     }
 
-    static func fabricate() -> Self? {
+    static func fabricateFromAppBundle() -> Self? {
         let nibName = String(describing: Self.self)
-        #if SPM
-        let bundle = Bundle.module
-        #else
         let bundle = Bundle(for: Self.self)
-        #endif
         return bundle.loadNibNamed(nibName, owner: nil, options: nil)?.first as? Self
     }
 
-    /// Загрузка опредленного типа view через nib из локального ресурса
-    ///
-    /// - Returns: загруженная view
     static func fabricateFromFrameworkBundle() -> Self? {
         let nibName = String(describing: Self.self)
         #if SPM
         let bundle = Bundle.module
         #else
+        let frameworkBundle = Bundle(for: Self.self)
         let bundleName = "CUIKit"
         guard let bundleURL = frameworkBundle.url(forResource: bundleName, withExtension: "bundle") else {
             preconditionFailure("Could not create a path to the CUIKit framework bundle")
