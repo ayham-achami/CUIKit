@@ -29,7 +29,7 @@ import UIKit
 @IBDesignable
 open class PlaceholderTextView: UITextView {
 
-   @IBInspectable
+    @IBInspectable
     open var placeholder: String? {
         get {
             return placeholderLabel.text
@@ -64,15 +64,15 @@ open class PlaceholderTextView: UITextView {
         }
         return size
     }
-    
+
     open override var textContainerInset: UIEdgeInsets {
         didSet {
             placeholderLabelTopConstraint?.constant = textContainerInset.top
             placeholderLabelLeftConstraint?.constant = textContainerInset.left + 5
-            placeholderLabelWidthConstraint?.constant = -textContainerInset.right
+            placeholderLabelWidthConstraint?.constant = -textContainerInset.right - textContainerInset.left - 10
         }
     }
-    
+
     private var placeholderLabelTopConstraint: NSLayoutConstraint?
     private var placeholderLabelLeftConstraint: NSLayoutConstraint?
     private var placeholderLabelWidthConstraint: NSLayoutConstraint?
@@ -88,7 +88,7 @@ open class PlaceholderTextView: UITextView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         setupPlaceholderLabel()
@@ -111,7 +111,7 @@ open class PlaceholderTextView: UITextView {
                                                name: UITextView.textDidChangeNotification,
                                                object: nil)
     }
-    
+
     private func activateConstraints() {
         guard
             let placeholderLabelTopConstraint,
