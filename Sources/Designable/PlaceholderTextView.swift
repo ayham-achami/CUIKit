@@ -65,6 +65,18 @@ open class PlaceholderTextView: UITextView {
         return size
     }
 
+    open override var textContainerInset: UIEdgeInsets {
+        didSet {
+            placeholderLabelTopConstraint?.constant = textContainerInset.top
+            placeholderLabelLeftConstraint?.constant = textContainerInset.left + 5
+            placeholderLabelWidthConstraint?.constant = -textContainerInset.right - textContainerInset.left - 10
+        }
+    }
+
+    private var placeholderLabelTopConstraint: NSLayoutConstraint?
+    private var placeholderLabelLeftConstraint: NSLayoutConstraint?
+    private var placeholderLabelWidthConstraint: NSLayoutConstraint?
+
     fileprivate lazy var placeholderLabel: UILabel = {
         let label = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 2), size: CGSize(width: frame.width, height: 28)))
         label.textColor = .lightGray
@@ -90,13 +102,27 @@ open class PlaceholderTextView: UITextView {
     private func setupPlaceholderLabel() {
         addSubview(placeholderLabel)
         bringSubviewToFront(placeholderLabel)
-        NSLayoutConstraint.activate([placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-                                     placeholderLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
-                                     placeholderLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -10)])
+        placeholderLabelTopConstraint = placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8)
+        placeholderLabelLeftConstraint = placeholderLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5)
+        placeholderLabelWidthConstraint = placeholderLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -10)
+        activateConstraints()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange(_:)),
                                                name: UITextView.textDidChangeNotification,
                                                object: nil)
+    }
+
+    private func activateConstraints() {
+        guard
+            let placeholderLabelTopConstraint,
+            let placeholderLabelLeftConstraint,
+            let placeholderLabelWidthConstraint
+        else { return }
+        NSLayoutConstraint.activate([
+            placeholderLabelTopConstraint,
+            placeholderLabelLeftConstraint,
+            placeholderLabelWidthConstraint
+        ])
     }
 
     public func setIsRequired(_ isRequired: Bool) {
