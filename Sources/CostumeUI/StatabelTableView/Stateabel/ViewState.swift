@@ -45,6 +45,9 @@ public struct ViewState {
 
         /// иконку состояния
         private var image: UIImage?
+        
+        /// тип рендеринга изображения
+        private var renderingMode: UIImage.RenderingMode?
 
         /// цвет иконки
         private var imageColor: UIColor?
@@ -75,6 +78,13 @@ public struct ViewState {
         /// - Parameter image: иконка состояния
         public func with(image: UIImage) -> Builder {
             self.image = image
+            return self
+        }
+        
+        /// добавить тип рендеринга изображения
+        /// - Parameter renderingMode: тип рендеринга изображения
+        public func with(renderingMode: UIImage.RenderingMode) -> Builder {
+            self.renderingMode = renderingMode
             return self
         }
 
@@ -131,14 +141,15 @@ public struct ViewState {
         /// - Returns: возвращает состояние view
         public func build() -> ViewState {
             ViewState(case: `case` ?? .empty,
-                              title: title,
-                              action: action ?? "",
-                              image: image ?? UIImage(),
-                              imageColor: imageColor,
-                              imageSideSize: imageSideSize,
-                              description: description ?? "",
-                              closeImage: closeImage,
-                              closeTitle: closeTitle)
+                      title: title,
+                      action: action ?? "",
+                      image: image ?? UIImage(),
+                      renderingMode: renderingMode ?? .alwaysTemplate,
+                      imageColor: imageColor,
+                      imageSideSize: imageSideSize,
+                      description: description ?? "",
+                      closeImage: closeImage,
+                      closeTitle: closeTitle)
         }
     }
 
@@ -166,6 +177,9 @@ public struct ViewState {
 
     /// иконку состояния
     public let image: UIImage
+    
+    /// тип рендеринга изображения
+    public let renderingMode: UIImage.RenderingMode
 
     /// цвет иконки
     public let imageColor: UIColor?
