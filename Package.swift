@@ -1,32 +1,52 @@
-// swift-tools-version:5.3
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "CUIKit",
-    platforms: [.iOS(.v13)],
+    defaultLocalization: "en",
+    platforms: [
+        .iOS(.v13)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "CUIKit",
-            targets: ["CUIKit"])
+            targets: [
+                "CUIKit"
+            ]
+        )
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/realm/SwiftLint", from: "0.53.0"),
+    ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CUIKit",
-            path: "Sources",
-            exclude: ["Info.plist"],
-            swiftSettings: [
-                    .define("SPM")
-                  ]),
+            resources: [
+                .process("Resources/StateView.xib")
+            ],
+            swiftSettings: [.define("SPM")],
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+            ]
+        ),
         .testTarget(
             name: "CUIKitTests",
-            dependencies: ["CUIKit"],
+            dependencies: [
+                "CUIKit"
+            ],
             path: "CUIKitTests",
-            exclude: ["Info.plist"])
-    ]
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+            ]
+        )
+    ],
+    swiftLanguageVersions: [.v5]
 )
+
+for target in package.targets {
+    var settings = target.swiftSettings ?? []
+    settings.append(.enableExperimentalFeature("StrictConcurrency=minimal"))
+    target.swiftSettings = settings
+}
