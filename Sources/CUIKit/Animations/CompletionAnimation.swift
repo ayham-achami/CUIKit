@@ -7,19 +7,19 @@ import UIKit
 /// Анимации завершения
 public protocol CompletionAnimation: ViewAnimation {
 
-    /// завершение с эффектом увядания
-    ///
-    /// - Parameter duration: продолжительность анимации
+    /// Завершение с эффектом увядания
+    /// - Parameter duration: Продолжительность анимации
     func fadeAnimation(duration: TimeInterval)
 }
 
 // MARK: - CompletionAnimation + CALayer + Default
 public extension CompletionAnimation where Self: CALayer {
 
-    /// завершение с эффектом увядания
-    /// - Parameter view: вью создаюший анимацию
-    /// - Parameter previousClipsToBounds: предыдущий `ClipsToBounds`
-    /// - Parameter duration: продолжительность анимации
+    /// Завершение с эффектом увядания
+    /// - Parameters:
+    ///   - view: Вью создающий анимацию
+    ///   - previousClipsToBounds: Предыдущий `ClipsToBounds`
+    ///   - duration: Продолжительность анимации
     func fadeAnimation(view: UIView? = nil, previousClipsToBounds: Bool? = nil, duration: TimeInterval) {
         CATransaction.begin()
         CATransaction.setCompletionBlock {

@@ -18,15 +18,18 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint", from: "0.53.0"),
+        .package(url: "https://github.com/realm/SwiftLint", from: "0.53.0")
     ],
     targets: [
         .target(
             name: "CUIKit",
             resources: [
-                .process("Resources/StateView.xib")
+                .process("Deprecated/Resources/StateView.xib")
             ],
-            swiftSettings: [.define("SPM")],
+            swiftSettings: [
+                .define("SPM"),
+                .define("DEBUG", .when(configuration: .debug))
+            ],
             plugins: [
                 .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]

@@ -7,16 +7,17 @@ import UIKit
 /// Анимация изменения размера
 public protocol TransformZoom: ViewAnimation {
 
-    /// Анимация появление через увелечение размера
-    ///
-    /// - Parameter duration: продолжительность анимации
+    /// Анимация появление через увеличение размера
+    /// - Parameter duration: Продолжительность анимации
     func showChangedZoom(withDuration duration: TimeInterval)
+    
     /// Анимация скрытия через уменьшение размера
-    ///
-    /// - Parameter duration: продолжительность анимации
+    /// - Parameter duration: Продолжительность анимации
     func hideChangedZoom(withDuration duration: TimeInterval)
-    /// Анимация появление через увелечение размера
+    
+    /// Анимация появление через увеличение размера
     func showChangedZoom()
+    
     /// Анимация скрытия через уменьшение размера
     func hideChangedZoom()
 }
@@ -24,11 +25,10 @@ public protocol TransformZoom: ViewAnimation {
 // MARK: - UIView + TransformZoom + Default
 public extension TransformZoom where Self: UIView {
 
-    /// Анимация появление через увелечение размера
-    ///
+    /// Анимация появление через увеличение размера
     /// - Parameters:
-    ///   - duration: продолжительность анимации
-    ///   - delay: задержка перед анимацией
+    ///   - duration: Продолжительность анимации
+    ///   - delay: Задержка перед анимацией
     func showChangedZoom(withDuration duration: TimeInterval, delay: TimeInterval) {
         UIView.animate(withDuration: 0.3, delay: delay, options: .curveEaseInOut, animations: { [weak self ] in
             guard let self = self else { return }
@@ -43,15 +43,13 @@ public extension TransformZoom where Self: UIView {
         })
     }
 
-    /// Анимация появление через увелечение размера
-    ///
-    /// - Parameter duration: продолжительность анимации
+    /// Анимация появление через увеличение размера
+    /// - Parameter duration: Продолжительность анимации
     func showChangedZoom(withDuration duration: TimeInterval) {
         showChangedZoom(withDuration: duration, delay: 0)
     }
 
     /// Анимация скрытия через уменьшение размера
-    ///
     /// - Parameter duration: продолжительность анимации
     func hideChangedZoom(withDuration duration: TimeInterval) {
         UIView.animate(withDuration: duration) { [weak self] in
@@ -61,7 +59,7 @@ public extension TransformZoom where Self: UIView {
         }
     }
 
-    /// Анимация появление через увелечение размера
+    /// Анимация появление через увеличение размера
     func showChangedZoom() {
         transform = .identity
         alpha = 1

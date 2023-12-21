@@ -7,21 +7,22 @@ import UIKit
 /// Слой коллекции который стремится создать максимальную по размеру ячейки, но количество колонок обязательно больше минимально заданного
 public protocol MaxColumnFlowLayouts {
 
-    /// отстыпы
+    /// Отступы
     var insets: UIEdgeInsets { get }
-    /// минимальная ширина колонки
+    /// Минимальная ширина колонки
     var minColumnWidth: CGFloat { get }
-    /// максимальная ширина колонки
+    /// Максимальная ширина колонки
     var maxColumnWidth: CGFloat { get }
-    /// минимальное количество колонок
+    /// Минимальное количество колонок
     var minColumnCount: Int { get }
-    /// максимальная высота ячейки
+    /// Максимальная высота ячейки
     var maxCellHeight: CGFloat { get }
 
-    /// Рассчет размера ячейки
+    /// Расчет размера ячейки
     func calculateItemSize() -> CGSize
 }
 
+// MARK: - MaxColumnFlowLayouts + Default
 public extension MaxColumnFlowLayouts where Self: UICollectionViewLayout {
 
     func calculateItemSize() -> CGSize {

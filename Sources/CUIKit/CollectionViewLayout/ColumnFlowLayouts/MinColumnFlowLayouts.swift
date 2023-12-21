@@ -7,17 +7,18 @@ import UIKit
 /// Слой коллекции который стремится разместить максимальное количество ячеейк в строке, но ширину ячейки сделать больше минимальной
 public protocol MinColumnFlowLayouts {
 
-    /// отстыпы
+    /// Oтступы
     var insets: UIEdgeInsets { get }
-    /// минимальная ширина колонки
+    /// Mинимальная ширина колонки
     var minColumnWidth: CGFloat { get }
-    /// максимальная высота ячейки
+    /// Mаксимальная высота ячейки
     var minCellHeight: CGFloat { get }
 
-    /// Рассчет размера ячейки
+    /// Расчет размера ячейки
     func calculateItemSize() -> CGSize
 }
 
+// MARK: - MinColumnFlowLayouts + Default
 public extension MinColumnFlowLayouts where Self: UICollectionViewLayout {
 
     func calculateItemSize() -> CGSize {

@@ -6,42 +6,39 @@ import UIKit
 
 /// Протокол делегата
 public protocol RearrangeableCollectionViewLayoutDelegate: AnyObject {
-
-    /// Спрашивает у делегата можно ли перемещать ячейку c IndexPath'а
-    ///
-    /// - parameter collectionView: текущий collectionView
-    /// - parameter layout: текущая layout
-    /// - parameter index: индекс ячейки
-    ///
-    /// - returns: возвращает true если ячейку можно перемещать, иначе false
+    
+    /// Спрашивает у делегата можно ли перемещать ячейку c IndexPath
+    /// - Parameters:
+    ///   - collectionView: Текущий collectionView
+    ///   - layout: Текущая layout
+    ///   - index: Индекс ячейки
+    /// - Returns: Возвращает true если ячейку можно перемещать, иначе false
     func collectionView(_ collectionView: UICollectionView, layout: RearrangeableCollectionViewLayout, canMoveItemFrom index: IndexPath) -> Bool
 
     /// Спрашивает у делегата можно ли переместить ячейку в IndexPath
-    ///
-    /// - parameter collectionView: текущий collectionView
-    /// - parameter layout: текущая layout
-    /// - parameter index: индекс ячейки
-    ///
-    /// - returns: возвращает true если ячейку можно переместить, иначе false
+    /// - Parameters:
+    ///    - collectionView: текущий collectionView
+    ///    - layout: текущая layout
+    ///    - index: индекс ячейки
+    /// - Returns: возвращает true если ячейку можно переместить, иначе false
     func collectionView(_ collectionView: UICollectionView, layout: RearrangeableCollectionViewLayout, canMoveItemTo index: IndexPath) -> Bool
 
     /// Сообщает делегату о завершении перемещения ячейки
-    ///
-    /// - parameter collectionView: текущий collectionView
-    /// - parameter layout: текущая layout
-    /// - parameter sourceIndexPath: indexPath источника
-    /// - parameter destinationIndexPath: indexPath назначения
+    /// - Parameters:
+    ///  - collectionView: Текущий collectionView
+    ///  - layout: Текущая layout
+    ///  - sourceIndexPath: IndexPath источника
+    ///  - destinationIndexPath: IndexPath назначения
     func collectionView(_ collectionView: UICollectionView, layout: RearrangeableCollectionViewLayout, didMoveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
 
-    /// Сообщает делегату о завершении перемещения ячейки (ячейка уже перемешна полностью)
-    ///
+    /// Сообщает делегату о завершении перемещения ячейки (ячейка уже перемещена полностью)
     /// - Parameters:
-    ///   - collectionView: текущий collectionView
-    ///   - layout: текущая layout
+    ///   - collectionView: Текущий collectionView
+    ///   - layout: Текущая layout
     func collectionView(_ collectionView: UICollectionView, finalizeItemDragIn layout: RearrangeableCollectionViewLayout)
 }
 
-/// Пакет данных необходимый для перемещния ячейки
+/// Пакет данных необходимый для перемещения ячейки
 private class LayoutBundle {
 
     var offset: UIOffset
@@ -83,8 +80,6 @@ public enum LayoutDraggingAxis {
 /// Layout с возможностью перемещения элементов
 public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
 
-    // MARK: - Public properties
-
     /// Возможные направления перемещения
     public var layoutDraggingAxis = LayoutDraggingAxis.axisY
 
@@ -97,15 +92,14 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
     /// Радиус скругления для рамки выделения
     public var moveCellBorderCornerRadius: CGFloat = 2
 
-    /// Делегат layout'а
+    /// Делегат layout
     public weak var delegate: RearrangeableCollectionViewLayoutDelegate?
 
     // MARK: - Private properties
 
     /// Рекогнайзер для жеста перетаскивания
     private lazy var moveGestureRecognizer: UILongPressGestureRecognizer = {
-        let recognizer = UILongPressGestureRecognizer(target: self,
-                                                      action: #selector(moveCollectionViewCells(_:)))
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(moveCollectionViewCells(_:)))
         recognizer.minimumPressDuration = 0.3
         recognizer.delegate = self
         return recognizer
@@ -116,8 +110,6 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
 
     /// Frame коллекции на супер вью
     fileprivate var collectionViewFrameInSuperView = CGRect.zero
-
-    // MARK: - Inits
     
     /// Публичный инициализатор с делегатом
     /// - Parameter delegate: delegate rearrangeableCollectionView
@@ -131,8 +123,6 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    // MARK: - Overrides
 
     /// Устанавливает возможность длительного нажатия на ячейку (если нажатие до это не было настроено)
     override public func prepare() {
@@ -148,8 +138,6 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
         return true
     }
 
-    // MARK: - Public methods
-
     /// Прервать перемещение и отчистить данные
     func invalidateDrag() {
         layoutBundle?.cellSnapshotImageView.removeFromSuperview()
@@ -159,8 +147,6 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
         self.delegate?.collectionView(collectionView, finalizeItemDragIn: self)
     }
 
-    // MARK: - Private methods
-
     /// Добавляет возможность длительного нажатия на ячейку (если нажатие до это не было настроено)
     fileprivate func setupLongPressGestureIfNeeded() {
         guard let collectionView = collectionView else { return }
@@ -169,9 +155,9 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
     }
 
     /// Обработчик начала перемещения
-    ///
-    /// - parameter dragPointOnSuperView: точка перемещения на супер вью
-    /// - parameter dragPointOnCollectionView: точка перемещения на коллекции
+    /// - Parameters:
+    ///  - dragPointOnSuperView: Точка перемещения на супер вью
+    ///  - dragPointOnCollectionView: Точка перемещения на коллекции
     fileprivate func handleMoveBegan(_ dragPointOnSuperView: CGPoint, _ dragPointOnCollectionView: CGPoint) {
         guard let collectionView = collectionView, let layoutBundle = layoutBundle else { return }
 
@@ -180,9 +166,9 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
     }
 
     /// Обработчик перемещения
-    ///
-    /// - parameter dragPointOnSuperView: точка перемещения на супер вью
-    /// - parameter dragPointOnCollectionView: точка перемещения на коллекции
+    /// - Parameters:
+    ///  - dragPointOnSuperView: Точка перемещения на супер вью
+    ///  - dragPointOnCollectionView: Точка перемещения на коллекции
     fileprivate func handleMoveChanged(_ dragPointOnSuperView: CGPoint, _ dragPointOnCollectionView: CGPoint) {
         // swiftlint:disable:previous cyclomatic_complexity
         guard let collectionView = collectionView, let layoutBundle = layoutBundle else { return }
@@ -231,24 +217,21 @@ public class RearrangeableCollectionViewLayout: UICollectionViewFlowLayout {
     }
 
     /// Обработчик окончания перемещения
-    ///
-    /// - parameter dragPointOnSuperView: точка перемещения на супер вью
-    /// - parameter dragPointOnCollectionView: точка перемещения на коллекции
+    /// - Parameters:
+    ///  - dragPointOnSuperView: Точка перемещения на супер вью
+    ///  - dragPointOnCollectionView: Точка перемещения на коллекции
     fileprivate func handleMoveEnded(_ dragPointOnSuperView: CGPoint, _ dragPointOnCollectionView: CGPoint) {
         defer { invalidateDrag() }
         guard let collectionView = collectionView, let layoutBundle = layoutBundle else { return }
-
-        if layoutBundle.sourceIndexPath != layoutBundle.currentIndexPath {
-            delegate?.collectionView(collectionView, layout: self, didMoveItemAt: layoutBundle.sourceIndexPath, to: layoutBundle.currentIndexPath)
-        }
+        guard layoutBundle.sourceIndexPath != layoutBundle.currentIndexPath else { return }
+        delegate?.collectionView(collectionView, layout: self, didMoveItemAt: layoutBundle.sourceIndexPath, to: layoutBundle.currentIndexPath)
     }
 
     /// Обработчик отмены перемещения
     fileprivate func handleMoveCancelled() {
         invalidateDrag()
     }
-
-    // MARK: - Actions
+    
     @objc fileprivate func moveCollectionViewCells(_ gestureRecognizer: UILongPressGestureRecognizer) {
         guard let collectionView = collectionView, let superView = collectionView.superview else { return }
 

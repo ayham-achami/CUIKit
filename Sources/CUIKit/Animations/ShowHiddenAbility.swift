@@ -4,29 +4,27 @@
 
 import UIKit
 
-/// протокол возможности скрытия и показа
+/// Протокол возможности скрытия и показа
 public protocol ShowHiddenAbility: AnchorTransformable {
 
-    /// показать изменения прозрачность объекта
+    /// Показать изменения прозрачность объекта
     func showChangedAlpha()
 
-    /// скрыть изменения прозрачность объекта
+    /// Скрыть изменения прозрачность объекта
     func hideChangedAlpha()
 
-    /// показать изменения трансформ объекта
+    /// Показать изменения трансформ объекта
     func showChangedTransform()
 
-    /// скрыть изменения трансформ объекта
-    ///
-    /// - Parameter anchor: направление трансфера
+    /// Скрыть изменения трансформ объекта
+    /// - Parameter anchor: Направление трансфера
     func hideChangedTransform(anchor: TransformAnchor)
 
-    /// показать изменения прозрачность и трансформ объекта
+    /// Показать изменения прозрачность и трансформ объекта
     func showChangedTransformAlpha()
 
-    /// скрыть изменения прозрачность и трансформ объекта
-    ///
-    /// - Parameter anchor: направление трансфера
+    /// Скрыть изменения прозрачность и трансформ объекта
+    /// - Parameter anchor: Направление трансфера
     func hideChangedTransformAlpha(anchor: TransformAnchor)
 }
 
@@ -60,41 +58,35 @@ public extension ShowHiddenAbility where Self: UIView {
     }
 }
 
-/// протокол возможности скрытия и показа анимационно
+/// Протокол возможности скрытия и показа анимационно
 public protocol ShowHideAnimation: AnchorTransformable {
 
-    /// показать изменения прозрачность объекта
-    ///
-    /// - Parameter duration: общая продолжительность анимации, измеренная в секундах.
+    /// Показать изменения прозрачность объекта
+    /// - Parameter duration: Общая продолжительность анимации, измеренная в секундах.
     func showAnimateAlpha(withDuration duration: TimeInterval)
 
-    /// скрыть изменения прозрачность объекта
-    ///
-    /// - Parameter duration: общая продолжительность анимации, измеренная в секундах.
+    /// Скрыть изменения прозрачность объекта
+    /// - Parameter duration: Общая продолжительность анимации, измеренная в секундах.
     func hidAnimateAlpha(withDuration duration: TimeInterval)
 
-    /// показать изменения трансформ объекта
-    ///
-    /// - Parameter duration: общая продолжительность анимации, измеренная в секундах.
+    /// Показать изменения трансформ объекта
+    /// - Parameter duration: Общая продолжительность анимации, измеренная в секундах.
     func showAnimateTransform(withDuration duration: TimeInterval)
 
-    /// скрыть изменения трансформ объекта
-    ///
+    /// Скрыть изменения трансформ объекта
     /// - Parameters:
-    ///   - duration: общая продолжительность анимации, измеренная в секундах.
-    ///   - anchor: направление трансфера
+    ///   - duration: Общая продолжительность анимации, измеренная в секундах.
+    ///   - anchor: Направление трансфера
     func hideAnimateTransform(withDuration duration: TimeInterval, using anchor: TransformAnchor)
 
-    /// показать изменения прозрачность и трансформ объекта
-    ///
-    /// - Parameter duration: общая продолжительность анимации, измеренная в секундах.
+    /// Показать изменения прозрачность и трансформ объекта
+    /// - Parameter duration: Общая продолжительность анимации, измеренная в секундах.
     func showAnimateTransformAlpha(withDuration duration: TimeInterval)
 
-    /// скрыть изменения прозрачность и трансформ объекта
-    ///
+    /// Скрыть изменения прозрачность и трансформ объекта
     /// - Parameters:
-    ///   - duration: общая продолжительность анимации, измеренная в секундах.
-    ///   - anchor: направление трансфера
+    ///   - duration: Общая продолжительность анимации, измеренная в секундах.
+    ///   - anchor: Направление трансфера
     func hideAnimateTransformAlpha(withDuration duration: TimeInterval, using anchor: TransformAnchor)
 }
 

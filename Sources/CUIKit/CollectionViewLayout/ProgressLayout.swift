@@ -55,11 +55,11 @@ extension ProgressAttributes {
         return super.copy(with: zone)
     }
 
-    /// Метод для сравнения объектов
+    /// Метод для сравнение объектов
     /// - Parameter object: сравниваемый объект.
     override open func isEqual(_ object: Any?) -> Bool {
-        let attrs = object as? ProgressAttributes
-        if attrs?.state != state || attrs?.id != id {
+        let attributes = object as? ProgressAttributes
+        if attributes?.state != state || attributes?.id != id {
             return false
         }
         return super.isEqual(object)
@@ -72,7 +72,7 @@ public protocol ProgressDataSource: AnyObject {
     /// Набор атрибутов загрузки
     /// - Parameters:
     ///   - collectionView: Коллекция запрашивая данных
-    ///   - indexPath: Aтрибутов загрузки
+    ///   - indexPath: Атрибуты загрузки
     func collectionView(_ collectionView: UICollectionView, loadingAttributesForitemAt indexPath: IndexPath) -> ProgressAttributes
 }
 
@@ -102,7 +102,7 @@ open class ProgressLayout: UICollectionViewFlowLayout {
     override open class var layoutAttributesClass: AnyClass { ProgressAttributes.self }
 
     /// Возвращает атрибуты для зоны
-    /// - Parameter rect: необходимая зона
+    /// - Parameter rect: Необходимая зона
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         super.layoutAttributesForElements(in: rect)?
             .compactMap { $0.copy() as? ProgressAttributes }
@@ -110,7 +110,7 @@ open class ProgressLayout: UICollectionViewFlowLayout {
     }
 
     /// Подготовка атрибутов
-    /// - Parameter attributes: атрибуты которые насыщаются данными
+    /// - Parameter attributes: Атрибуты которые насыщаются данными
     private func prepareAttributes(attributes: ProgressAttributes) -> ProgressAttributes {
         guard let collectionView = collectionView, let dataSource = collectionView.dataSource as? ProgressDataSource else { return attributes }
         let dataSourceAttributes = dataSource.collectionView(collectionView, loadingAttributesForitemAt: attributes.indexPath)
@@ -121,14 +121,13 @@ open class ProgressLayout: UICollectionViewFlowLayout {
 }
 
 /// CompositionalLayout ячеек с прогрессом
-@available(iOS 13.0, *)
 open class ProgressCompositionLayout: UICollectionViewCompositionalLayout {
 
     /// Тип атрибутов
     override open class var layoutAttributesClass: AnyClass { ProgressAttributes.self }
 
     /// Возвращает атрибуты для зоны
-    /// - Parameter rect: необходимая зона
+    /// - Parameter rect: Необходимая зона
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         super.layoutAttributesForElements(in: rect)?
             .compactMap { $0.copy() as? ProgressAttributes }
@@ -136,7 +135,7 @@ open class ProgressCompositionLayout: UICollectionViewCompositionalLayout {
     }
 
     /// Подготовка атрибутов
-    /// - Parameter attributes: атрибуты которые насыщаются данными
+    /// - Parameter attributes: Атрибуты которые насыщаются данными
     private func prepareAttributes(attributes: ProgressAttributes) -> ProgressAttributes {
         guard let collectionView = collectionView, let dataSource = collectionView.dataSource as? ProgressDataSource else { return attributes }
         let dataSourceAttributes = dataSource.collectionView(collectionView, loadingAttributesForitemAt: attributes.indexPath)
@@ -173,6 +172,7 @@ public protocol ProgressCell {
     func applyProgress(_ layoutAttributes: ProgressAttributes)
 }
 
+// MARK: - ProgressCell + UICollectionViewCell
 public extension ProgressCell where Self: UICollectionViewCell {
 
     var attachedView: UIView { self }
@@ -183,8 +183,8 @@ public extension ProgressCell where Self: UICollectionViewCell {
             attachedView.subviews.first(where: { $0 is ProgressView })?.removeFromSuperview()
         case .downloading(let progress):
             let progressView: ProgressView
-            if let currrentProgressView = attachedView.subviews.first(where: { $0 is ProgressView }) as? ProgressView {
-                progressView = currrentProgressView
+            if let currentProgressView = attachedView.subviews.first(where: { $0 is ProgressView }) as? ProgressView {
+                progressView = currentProgressView
             } else {
                 progressView = self.progressView
                 attachedView.addSubview(progressView)

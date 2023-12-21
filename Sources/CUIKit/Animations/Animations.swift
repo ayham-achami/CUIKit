@@ -4,16 +4,16 @@
 
 import UIKit
 
-/// пространство имен анимации
+/// Пространство имен анимации
 internal struct AnimationNamespace {
 
-    /// название слоев имеющий анимацию
+    /// Название слоев имеющий анимацию
     struct Layers {
 
-        /// слой с импульсной анимацей
+        /// Слой с импульсной анимаций
         static var ripple: String { "RippleLayer" }
     }
 }
 
-/// базовый протокол анимации
+/// Базовый протокол анимации
 public protocol ViewAnimation {}

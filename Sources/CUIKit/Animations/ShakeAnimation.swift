@@ -4,10 +4,10 @@
 
 import UIKit
 
-/// протокол анимация встряхивание
+/// Протокол анимация встряхивание
 public protocol ShakeAnimation: ViewAnimation {
 
-    /// анимация встряхивание
+    /// Анимация встряхивание
     func shakeAnimation()
 }
 

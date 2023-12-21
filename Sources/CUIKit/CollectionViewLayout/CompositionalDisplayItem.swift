@@ -16,7 +16,6 @@ public protocol CompositionalDisplayItem {
 }
 
 /// Модель для работы с displayItem у CompositionalLayout
-@available(iOS 13.0, *)
 public protocol AnyCompositionalModel: UIModel {
     
     /// Тип DisplayItem для работы с данной моделью
@@ -24,39 +23,51 @@ public protocol AnyCompositionalModel: UIModel {
 }
 
 /// Модель для работы с displayItem у CompositionalLayout
-@available(iOS 13.0, *)
 public protocol CompositionalModel: AnyCompositionalModel {
     
-    // Вовзращает фабрику для индекса
+    // Возвращает фабрику для индекса
     /// - Parameters:
-    ///   - index: индекс
-    /// - Returns: фабрика ячейки
+    ///   - index: Индекс
+    /// - Returns: Фабрика ячейки
+    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
     subscript(index: Int) -> AnyCellFactory { get }
+    
+    // Возвращает фабрику для индекса
+    /// - Parameters:
+    ///   - index: Индекс
+    /// - Returns: Фабрика ячейки
+    subscript(index: Int) -> any UIReusableViewFactory { get }
 }
 
 /// Модель для работы с displayItem у CompositionalLayout с делегацией
-@available(iOS 13.0, *)
 public protocol DelegationCompositionalModel: AnyCompositionalModel {
     
-    // Вовзращает фабрику для индекса
+    // Возвращает фабрику для индекса
     /// - Parameters:
-    ///   - index: индекс
-    ///   - delegate: делегат для ячейки
-    /// - Returns: фабрика ячейки
+    ///   - index: Индекс
+    ///   - delegate: Делегат для ячейки
+    /// - Returns: Фабрика ячейки
+    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
     subscript(index: Int, delegate: AnyObject) -> AnyCellFactory { get }
+    
+    // Возвращает фабрику для индекса
+    /// - Parameters:
+    ///   - index: Индекс
+    ///   - delegate: Делегат для ячейки
+    /// - Returns: Фабрика ячейки
+    subscript(index: Int, delegate: AnyObject) -> any UIDelegableReusableViewFactory { get }
 }
 
 /// Функция преобразования индекса в CompositionalModel
-@available(iOS 13.0, *)
 public typealias CompositionalLayoutSectionConvertor = (Int) -> AnyCompositionalModel?
 
-@available(iOS 13.0, *)
+// MARK: - UICollectionViewCompositionalLayout + Init
 public extension UICollectionViewCompositionalLayout {
     
     /// Инициализатор на основе конвертера и конфигурации
     /// - Parameters:
-    ///   - convertor: конвертер
-    ///   - configuration: конфигурация
+    ///   - convertor: Конвертер
+    ///   - configuration: Конфигурация
     convenience init(convertor: @escaping CompositionalLayoutSectionConvertor,
                      configuration: UICollectionViewCompositionalLayoutConfiguration) {
         self.init(sectionProvider: { index, environment in
@@ -65,7 +76,7 @@ public extension UICollectionViewCompositionalLayout {
     }
     
     /// Инициализатор на основе конвертера
-    /// - Parameter convertor: конвертер
+    /// - Parameter convertor: Конвертер
     convenience init(convertor: @escaping CompositionalLayoutSectionConvertor) {
         self.init(sectionProvider: { index, environment in
             convertor(index)?.displayType.init().section(for: environment)

@@ -7,23 +7,23 @@ import UIKit
 /// Layout умеющий вычислять количество ячеек на основе размера экрана
 open class ColumnFlowLayout: UICollectionViewFlowLayout {
 
-    /// минимальная ширина колонки
+    /// Минимальная ширина колонки
     private let minColumnWidth: CGFloat
-    /// высота ячейки
+    /// Высота ячейки
     private let cellHeight: CGFloat
-    /// отступы
+    /// Отступы
     private var insets: UIEdgeInsets
 
-    /// набор удаленных индексов
+    /// Набор удаленных индексов
     private var deletingIndexPaths = [IndexPath]()
-    /// набор добавленных индексов
+    /// Набор добавленных индексов
     private var insertingIndexPaths = [IndexPath]()
 
     /// Стандартная инициализация
     /// - Parameters:
-    ///   - minColumnWidth: минимальная ширина колонки
-    ///   - cellHeight: высота ячейки
-    ///   - edgeInsets: отстыпы
+    ///   - minColumnWidth: Минимальная ширина колонки
+    ///   - cellHeight: Высота ячейки
+    ///   - edgeInsets: Отстыпы
     public init(minColumnWidth: CGFloat, cellHeight: CGFloat, edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16, bottom: 0.0, right: 16)) {
         self.minColumnWidth = minColumnWidth
         self.cellHeight = cellHeight
@@ -31,13 +31,9 @@ open class ColumnFlowLayout: UICollectionViewFlowLayout {
         super.init()
     }
 
-    /// Инициализация с кодером
-    /// - Parameter coder: кодер
     public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // MARK: Overrides
 
     /// Подготовка размеров ячеек и отступов collectionView
     override open func prepare() {
@@ -59,8 +55,8 @@ open class ColumnFlowLayout: UICollectionViewFlowLayout {
     }
 
     /// Финальный layout атрибутов для исчезающего элемента
-    /// - Parameter itemIndexPath: indexPath
-    /// - Returns: возвращает атрибуты для исчезающей ячейки
+    /// - Parameter itemIndexPath:  IndexPath
+    /// - Returns: Возвращает атрибуты для исчезающей ячейки
     override open func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         guard let attributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) else { return nil }
         if !deletingIndexPaths.isEmpty {
@@ -74,8 +70,8 @@ open class ColumnFlowLayout: UICollectionViewFlowLayout {
     }
 
     /// Начальный layout атрибутов для появляющегося элемента
-    /// - Parameter itemIndexPath: indexPath
-    /// - Returns: возвращает атрибуты для появляющейся ячейки
+    /// - Parameter itemIndexPath: IndexPath
+    /// - Returns: Возвращает атрибуты для появляющейся ячейки
     override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         guard let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath) else { return nil }
         if insertingIndexPaths.contains(itemIndexPath) {
@@ -87,7 +83,7 @@ open class ColumnFlowLayout: UICollectionViewFlowLayout {
     }
     
     /// Подготовка для обновления ячеек коллекции
-    /// - Parameter updateItems: массив ячеек коллекции, которые надо обновить
+    /// - Parameter updateItems: Массив ячеек коллекции, которые надо обновить
     override open func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
         super.prepare(forCollectionViewUpdates: updateItems)
         for update in updateItems {

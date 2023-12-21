@@ -4,25 +4,25 @@
 
 import UIKit
 
-/// направление трансфера
+/// Направление трансфера
 public enum TransformAnchor {
-    /// - topAnchor: вверх
+    
+    /// - topAnchor: Вверх
     case topAnchor
-    /// - bottomAnchor: вниз
+    /// - bottomAnchor: Вниз
     case bottomAnchor
-    /// - leftAnchor: влева
+    /// - leftAnchor: Влева
     case leftAnchor
-    /// - rightAnchor: вправа
+    /// - rightAnchor: Вправа
     case rightAnchor
 }
 
-/// протокол трансфер объекта
+/// Протокол трансфер объекта
 public protocol AnchorTransformable: ViewAnimation {
 
-    /// возвращает нужный сдвиг по нужному направлению
-    ///
-    /// - Parameter anchor: направление трансфера
-    /// - Returns: нужный сдвиг
+    /// Возвращает нужный сдвиг по нужному направлению
+    /// - Parameter anchor: Направление трансфера
+    /// - Returns: Нужный сдвиг
     func transform(for anchor: TransformAnchor) -> CGAffineTransform
 }
 
