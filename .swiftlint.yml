@@ -23,7 +23,6 @@ opt_in_rules:
 included:
   - Sources
   - CUIKitTests
-  - Package.swift
 excluded:
   - Templates
   - "**/*.gen.swift"
@@ -78,8 +77,6 @@ file_header:
                     \/\/  .*?\.swift
                     \/\/
   severity: error
-  excluded:
-    - Package.swift
 type_contents_order:
   order:
     - [subtype, type_alias, associated_type, case, type_method, ib_inspectable, ib_outlet, instance_property, type_property, subscript] 
