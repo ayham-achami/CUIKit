@@ -45,6 +45,13 @@ open class PlaceholderTextView: UITextView {
             invalidateIntrinsicContentSize()
         }
     }
+    
+    open override var attributedText: NSAttributedString! {
+        didSet {
+            placeholderLabel.isHidden = !text.isEmpty
+            invalidateIntrinsicContentSize()
+        }
+    }
 
     open override var font: UIFont? {
         didSet {
