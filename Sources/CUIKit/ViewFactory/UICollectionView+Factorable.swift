@@ -10,31 +10,31 @@ extension UICollectionViewCell: Factorable {}
 // MARK: - UICollectionView + Register
 public extension UICollectionView {
     
-    /// <#Description#>
-    /// - Parameter _: <#_ description#>
+    /// Зарегистрировать фабрику
+    /// - Parameter _:  тип фабрики для регистрации
     func register<Factory>(factory _: Factory.Type) where Factory: UIViewFactory, Factory: Identifiable {
         register(Factory.View.self, forCellWithReuseIdentifier: Factory.identifier)
     }
     
-    /// <#Description#>
+    /// Зарегистрировать NIB-фабрику
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - bundle: <#bundle description#>
+    ///   - _: тип фабрики для регистрации
+    ///   - bundle: бандл для поиска фабрики
     func register<Factory>(nibFactory _: Factory.Type, bundle: Bundle? = nil) where Factory: Identifiable {
         let nib = UINib(nibName: Factory.identifier, bundle: bundle)
         register(nib, forCellWithReuseIdentifier: Factory.identifier)
     }
     
-    /// <#Description#>
-    /// - Parameter supplementaryFactory: <#supplementaryFactory description#>
+    /// Зарегистрировать supplementary фабрику
+    /// - Parameter supplementaryFactory: тип фабрики для регистрации
     func register<Factory>(supplementaryFactory: Factory.Type) where Factory: UISupplementaryViewFactory, Factory: Identifiable, Factory: Kindable {
         register(Factory.View.self, forSupplementaryViewOfKind: Factory.kind, withReuseIdentifier: Factory.identifier)
     }
     
-    /// <#Description#>
+    /// Зарегистрировать supplementary NIB-фабрику
     /// - Parameters:
-    ///   - nibSupplementaryFactory: <#nibSupplementaryFactory description#>
-    ///   - bundle: <#bundle description#>
+    ///   - nibSupplementaryFactory: тип фабрики для регистрации
+    ///   - bundle: бандл для поиска фабрики
     func register<Factory>(nibSupplementaryFactory: Factory.Type, bundle: Bundle? = nil) where Factory: UISupplementaryViewFactory, Factory: Identifiable, Factory: Kindable {
         let nib = UINib(nibName: Factory.identifier, bundle: bundle)
         register(nib, forSupplementaryViewOfKind: Factory.kind, withReuseIdentifier: Factory.identifier)
@@ -44,11 +44,11 @@ public extension UICollectionView {
 // MARK: - UICollectionView + Reuseable + UIFactory
 public extension UICollectionView {
     
-    /// <#Description#>
+    ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - factory: <#factory description#>
-    ///   - indexPath: <#indexPath description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - indexPath: индекс для ячейки
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableCell<Factory>(by factory: Factory,
                                       for indexPath: IndexPath) -> UICollectionViewCell where Factory: UIViewFactory, Factory: Identifiable {
         let cell = dequeueReusableCell(withReuseIdentifier: Factory.identifier, for: indexPath)
@@ -63,24 +63,24 @@ public extension UICollectionView {
 // MARK: - UICollectionView + Reuseable
 public extension UICollectionView {
     
-    /// <#Description#>
+    ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - model: <#model description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - indexPath: индекс для ячейки
+    ///   - model:  модель для ячейки
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       model: Factory.Model) -> UICollectionViewCell where Factory: UIReusableViewFactory {
         dequeueReusableCell(by: Factory(model), for: indexPath)
     }
     
-    /// <#Description#>
+    ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - models: <#models description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - indexPath: индекс для ячейки
+    ///   - models:  массив моделей
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       models: [Factory.Model]) -> UICollectionViewCell where Factory: UIReusableViewFactory {
@@ -91,13 +91,13 @@ public extension UICollectionView {
 // MARK: - UICollectionView + Reuseable + Model
 public extension UICollectionView {
     
-    /// <#Description#>
+    ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - model: <#model description#>
-    ///   - delegate: <#delegate description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - indexPath: индекс для ячейки
+    ///   - model:  модель для ячейки
+    ///   - delegate: делега для ячейки
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       model: Factory.Model,
@@ -105,13 +105,13 @@ public extension UICollectionView {
         dequeueReusableCell(by: Factory(model, delegate), for: indexPath)
     }
     
-    /// <#Description#>
+    ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - models: <#models description#>
-    ///   - delegate: <#delegate description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - indexPath: индекс для ячейки
+    ///   - model:  массив моделей
+    ///   - delegate: делега для ячейки
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       models: [Factory.Model],
@@ -123,11 +123,11 @@ public extension UICollectionView {
 // MARK: - UICollectionView + Reuseable + UIFactory + Supplementary
 public extension UICollectionView {
     
-    /// <#Description#>
+    ///  Вернуть supplementary из фабрики
     /// - Parameters:
-    ///   - factory: <#factory description#>
-    ///   - indexPath: <#indexPath description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть supplementary
+    ///   - indexPath: индекс для supplementary
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableSupplementaryView<Factory>(by factory: Factory,
                                                    for indexPath: IndexPath) -> UICollectionReusableView where Factory: UIViewFactory, Factory: Identifiable, Factory: Kindable {
         let view = dequeueReusableSupplementaryView(ofKind: Factory.kind, withReuseIdentifier: Factory.identifier, for: indexPath)
@@ -142,24 +142,24 @@ public extension UICollectionView {
 // MARK: - UICollectionView + Reuseable + Supplementary
 public extension UICollectionView {
     
-    /// <#Description#>
+    ///  Вернуть supplementary из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - model: <#model description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть supplementary
+    ///   - indexPath: индекс для supplementary
+    ///   - model: модель для supplementary
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableSupplementaryView<Factory>(by _: Factory.Type,
                                                    for indexPath: IndexPath,
                                                    model: Factory.Model) -> UICollectionReusableView where Factory: UIReusableSupplementaryViewFactory {
         dequeueReusableSupplementaryView(by: Factory(model), for: indexPath)
     }
     
-    /// <#Description#>
+    ///  Вернуть supplementary из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - models: <#models description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть supplementary
+    ///   - indexPath: индекс для supplementary
+    ///   - models: массив моделей для supplementary
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableSupplementaryView<Factory>(by _: Factory.Type,
                                                    for indexPath: IndexPath,
                                                    models: [Factory.Model]) -> UICollectionReusableView where Factory: UIReusableSupplementaryViewFactory {
@@ -170,13 +170,13 @@ public extension UICollectionView {
 // MARK: - UICollectionView + Reuseable + Supplementary + Model
 public extension UICollectionView {
     
-    /// <#Description#>
+    ///  Вернуть supplementary из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - model: <#model description#>
-    ///   - delegate: <#delegate description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть supplementary
+    ///   - indexPath: индекс для supplementary
+    ///   - model: модель для supplementary
+    ///   - delegate:  делегат для supplementary
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableSupplementaryView<Factory>(by _: Factory.Type,
                                                    for indexPath: IndexPath,
                                                    model: Factory.Model,
@@ -184,13 +184,13 @@ public extension UICollectionView {
         dequeueReusableSupplementaryView(by: Factory(model, delegate), for: indexPath)
     }
     
-    /// <#Description#>
+    ///  Вернуть supplementary из фабрики
     /// - Parameters:
-    ///   - _: <#_ description#>
-    ///   - indexPath: <#indexPath description#>
-    ///   - models: <#models description#>
-    ///   - delegate: <#delegate description#>
-    /// - Returns: <#description#>
+    ///   - factory: фабрика из которой необходмо вернуть supplementary
+    ///   - indexPath: индекс для supplementary
+    ///   - models: массив моделей для supplementary
+    ///   - delegate:  делегат для supplementary
+    /// - Returns: возвращаяемая ячейка
     func dequeueReusableSupplementaryView<Factory>(by _: Factory.Type,
                                                    for indexPath: IndexPath,
                                                    models: [Factory.Model],

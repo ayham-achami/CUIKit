@@ -4,54 +4,54 @@
 
 import UIKit
 
-/// <#Description#>
+/// View порожденная из фабрики
 public protocol Factorable: UIView {}
 
-/// <#Description#>
+/// Протокол с идентификатором
 public protocol Identifiable {
     
     typealias Identifier = String
     
-    /// <#Description#>
+    /// Идентификатор объекта
     static var identifier: Identifier { get }
 }
 
-/// <#Description#>
+/// Протокол с типом
 public protocol Kindable {
     
     typealias Kind = String
     
-    /// <#Description#>
+    /// тип объекта
     static var kind: Kind { get }
 }
 
-/// <#Description#>
+/// Провайдер ui-моделей
 public protocol UIModelProvider {
     
     associatedtype Model: UIModel
 }
 
-/// <#Description#>
+/// Фабрика UIView
 public protocol UIViewFactory {
     
     associatedtype View: Factorable
     
-    /// <#Description#>
-    /// - Parameter view: <#view description#>
+    /// Метод для отрисовки view
+    /// - Parameter view: вью для отрисовки
     func rendering(_ view: View)
 }
 
-/// <#Description#>
+/// Фабрика UIView с делеагатом
 public protocol UIDelegableViewFactory: UIViewFactory {
     
     associatedtype Delegate
 }
 
-/// <#Description#>
+/// Фабрика UIView с реюзом
 public protocol UIReusableViewFactory: UIViewFactory, UIModelProvider, Identifiable {
     
-    /// <#Description#>
-    /// - Parameter model: <#model description#>
+    /// Инициализатор с моделью
+    /// - Parameter model: модель для View
     init(_ model: Model)
 }
 
@@ -63,13 +63,13 @@ public extension UIReusableViewFactory {
     }
 }
 
-/// <#Description#>
+/// /// Фабрика UIView с реюзом и делегатом
 public protocol UIDelegableReusableViewFactory: UIDelegableViewFactory, UIModelProvider, Identifiable {
     
-    /// <#Description#>
+    /// Инициализатор с моделью и делегатом
     /// - Parameters:
-    ///   - model: <#model description#>
-    ///   - delegate: <#delegate description#>
+    ///   - model: модель для View
+    ///   - delegate: делегат для View
     init(_ model: Model, _ delegate: Delegate)
 }
 
@@ -81,14 +81,14 @@ public extension UIDelegableReusableViewFactory {
     }
 }
 
-/// <#Description#>
+/// UISupplementaryViewFactory + UIViewFactory
 public protocol UISupplementaryViewFactory: UIViewFactory {}
 
-/// <#Description#>
+/// Фабирка для Supplementary c реюзом
 public protocol UIReusableSupplementaryViewFactory: UISupplementaryViewFactory, UIModelProvider, Identifiable, Kindable {
     
-    /// <#Description#>
-    /// - Parameter model: <#model description#>
+    /// Инициализатор с моделью
+    /// - Parameter model: модель для View
     init(_ model: Model)
 }
 
@@ -100,13 +100,13 @@ public extension UIReusableSupplementaryViewFactory {
     }
 }
 
-/// <#Description#>
+/// Фабирка для Supplementary c реюзом и делегатом
 public protocol UIDelegableReusableSupplementaryViewFactory: UISupplementaryViewFactory, UIDelegableViewFactory, UIModelProvider, Identifiable, Kindable {
     
-    /// <#Description#>
+    /// Инициализатор с моделью и делегатом
     /// - Parameters:
-    ///   - model: <#model description#>
-    ///   - delegate: <#delegate description#>
+    ///   - model: модель для View
+    ///   - delegate: делегат для View
     init(_ model: Model, _ delegate: Delegate)
 }
 
