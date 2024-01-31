@@ -41,7 +41,7 @@ public protocol UIViewFactory {
     func rendering(_ view: View)
 }
 
-/// Фабрика UIView с делеагатом
+/// Фабрика UIView с делеагтом
 public protocol UIDelegableViewFactory: UIViewFactory {
     
     associatedtype Delegate

@@ -26,16 +26,16 @@ public extension UITableView {
     }
     
     /// Зарегистрировать фабрику для хедера или футера
-    /// - Parameter headerFooterfactory: тип фабрики для регистрации
-    func register<Factory>(headerFooterfactory _: Factory.Type) where Factory: UIViewFactory, Factory: Identifiable {
+    /// - Parameter headerFooterFactory: тип фабрики для регистрации
+    func register<Factory>(headerFooterFactory _: Factory.Type) where Factory: UIViewFactory, Factory: Identifiable {
         register(Factory.View.self, forHeaderFooterViewReuseIdentifier: Factory.identifier)
     }
     
     /// Зарегистрировать фабрику для хедера или футера
     /// - Parameters:
-    ///   - nibHeaderFooterfactoryFactory: тип фабрики для регистрации
+    ///   - nibHeaderFooterFactory: тип фабрики для регистрации
     ///   - bundle: бандл для поиска фабрики
-    func register<Factory>(nibHeaderFooterfactory _: Factory.Type, bundle: Bundle? = nil) where Factory: UIViewFactory, Factory: Identifiable {
+    func register<Factory>(nibHeaderFooterFactory _: Factory.Type, bundle: Bundle? = nil) where Factory: UIViewFactory, Factory: Identifiable {
         let nib = UINib(nibName: Factory.identifier, bundle: bundle)
         register(nib, forHeaderFooterViewReuseIdentifier: Factory.identifier)
     }
@@ -46,9 +46,9 @@ public extension UITableView {
     
     ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - factory: фабрика из которой необходимо вернуть ячейку
     ///   - indexPath: индекс для ячейки
-    /// - Returns: возвращаяемая ячейка
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableCell<Factory>(by factory: Factory,
                                       for indexPath: IndexPath) -> UITableViewCell where Factory: UIViewFactory, Factory: Identifiable {
         let cell = dequeueReusableCell(withIdentifier: Factory.identifier, for: indexPath)
@@ -65,10 +65,10 @@ public extension UITableView {
     
     ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - factory: фабрика из которой необходимо вернуть ячейку
     ///   - indexPath: индекс для ячейки
     ///   - model:  модель для ячейки
-    /// - Returns: возвращаяемая ячейка
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       model: Factory.Model) -> UITableViewCell where Factory: UIReusableViewFactory {
@@ -77,10 +77,10 @@ public extension UITableView {
     
     ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - factory: фабрика из которой необходимо вернуть ячейку
     ///   - indexPath: индекс для ячейки
     ///   - models:  массив моделей
-    /// - Returns: возвращаяемая ячейка
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       models: [Factory.Model]) -> UITableViewCell where Factory: UIReusableViewFactory {
@@ -93,11 +93,11 @@ public extension UITableView {
     
     ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - factory: фабрика из которой необходимо вернуть ячейку
     ///   - indexPath: индекс для ячейки
     ///   - model:  модель для ячейки
-    ///   - delegate: делега для ячейки
-    /// - Returns: возвращаяемая ячейка
+    ///   - delegate: делегат для ячейки
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       model: Factory.Model,
@@ -107,11 +107,11 @@ public extension UITableView {
     
     ///  Вернуть ячейку из фабрики
     /// - Parameters:
-    ///   - factory: фабрика из которой необходмо вернуть ячейку
+    ///   - factory: фабрика из которой необходимо вернуть ячейку
     ///   - indexPath: индекс для ячейки
     ///   - model:  массив моделей
-    ///   - delegate: делега для ячейки
-    /// - Returns: возвращаяемая ячейка
+    ///   - delegate: делегат для ячейки
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableCell<Factory>(by _: Factory.Type,
                                       for indexPath: IndexPath,
                                       models: [Factory.Model],
@@ -125,9 +125,9 @@ public extension UITableView {
     
     ///  Вернуть хедер или футер из фабрики
     /// - Parameters:
-    ///   - factory: фабрика из которой необходмо вернуть хедер или футер
+    ///   - factory: фабрика из которой необходимо вернуть хедер или футер
     ///   - indexPath: индекс для хедера или футера
-    /// - Returns: возвращаяемая ячейка
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableHeaderFooterView<Factory>(by factory: Factory,
                                                   for indexPath: IndexPath) -> UITableViewHeaderFooterView? where Factory: UIViewFactory, Factory: Identifiable {
         let view = dequeueReusableHeaderFooterView(withIdentifier: Factory.identifier)
@@ -142,12 +142,12 @@ public extension UITableView {
 // MARK: - UITableView + Reuseable
 public extension UITableView {
     
-    ///  Вернуть хедер или футер из фабрики
+    /// Вернуть хедер или футер из фабрики
     /// - Parameters:
-    ///   - _: фабрика из которой необходмо вернуть хедер или футер
+    ///   - factory: фабрика из которой необходимо вернуть хедер или футер
     ///   - indexPath: индекс для хедера или футера
     ///   - model: модель для хедера или футера
-    /// - Returns: возвращаяемая ячейка
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableHeaderFooterView<Factory>(by _: Factory.Type,
                                                   for indexPath: IndexPath,
                                                   model: Factory.Model) -> UITableViewHeaderFooterView? where Factory: UIReusableViewFactory {
@@ -156,10 +156,10 @@ public extension UITableView {
     
     ///  Вернуть хедер или футер из фабрики
     /// - Parameters:
-    ///   - _: фабрика из которой необходмо вернуть хедер или футер
+    ///   - factory: фабрика из которой необходимо вернуть хедер или футер
     ///   - indexPath: индекс для хедера или футера
-    ///   - models: массив моделей для хедера или футера
-    /// - Returns: возвращаяемая ячейка
+    ///   - model: модель для хедера или футера
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableHeaderFooterView<Factory>(by _: Factory.Type,
                                                   for indexPath: IndexPath,
                                                   models: [Factory.Model]) -> UITableViewHeaderFooterView? where Factory: UIReusableViewFactory {
@@ -172,11 +172,11 @@ public extension UITableView {
     
     ///  Вернуть хедер или футер из фабрики
     /// - Parameters:
-    ///   - _: фабрика из которой необходмо вернуть хедер или футер
+    ///   - factory: фабрика из которой необходимо вернуть хедер или футер
     ///   - indexPath: индекс для хедера или футера
     ///   - model: модель для хедера или футера
     ///   - delegate:  делегат для хедера или футера
-    /// - Returns: возвращаяемая ячейка
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableHeaderFooterView<Factory>(by _: Factory.Type,
                                                   for indexPath: IndexPath,
                                                   model: Factory.Model,
@@ -186,11 +186,11 @@ public extension UITableView {
     
     ///  Вернуть хедер или футер из фабрики
     /// - Parameters:
-    ///   - _: фабрика из которой необходмо вернуть хедер или футер
+    ///   - factory: фабрика из которой необходимо вернуть хедер или футер
     ///   - indexPath: индекс для хедера или футера
     ///   - models: массив моделей для хедера или футера
     ///   - delegate:  делегат для хедера или футера
-    /// - Returns: возвращаяемая ячейка
+    /// - Returns: возвращаемая ячейка
     func dequeueReusableHeaderFooterView<Factory>(by _: Factory.Type,
                                                   for indexPath: IndexPath,
                                                   models: [Factory.Model],
