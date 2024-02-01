@@ -105,7 +105,7 @@ public class StateView: UIView, Nibble {
         } else {
             heightImageViewConstraint.isActive = false
         }
-        stateImageView.image = state.image.withRenderingMode(.alwaysTemplate)
+        stateImageView.image = state.image.withRenderingMode(state.renderingMode)
 
         titleLabel.text = state.title ?? ""
         titleLabel.isHidden = state.title?.isEmpty ?? true

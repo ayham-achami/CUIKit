@@ -25,6 +25,13 @@ open class PlaceholderTextView: UITextView {
             invalidateIntrinsicContentSize()
         }
     }
+    
+    open override var attributedText: NSAttributedString! {
+        didSet {
+            placeholderLabel.isHidden = !text.isEmpty
+            invalidateIntrinsicContentSize()
+        }
+    }
 
     open override var font: UIFont? {
         didSet {
@@ -33,6 +40,7 @@ open class PlaceholderTextView: UITextView {
     }
 
     public var maxHeight: CGFloat = 150
+    public var imagePasteHandler : (() -> Void)?
 
     open override var intrinsicContentSize: CGSize {
         var size = super.intrinsicContentSize
@@ -77,6 +85,21 @@ open class PlaceholderTextView: UITextView {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupPlaceholderLabel()
+    }
+    
+    open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(paste(_:)), UIPasteboard.general.image != nil {
+            return true
+        } else {
+            return super.canPerformAction(action, withSender: sender)
+        }
+    }
+    
+    open override func paste(_ sender: Any?) {
+        super.paste(sender)
+        if UIPasteboard.general.image != nil {
+            imagePasteHandler?()
+        }
     }
 
     private func setupPlaceholderLabel() {
