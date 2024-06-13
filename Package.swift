@@ -18,7 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint", from: "0.53.0")
+        .package(url: "https://github.com/realm/SwiftLint", exact: "0.55.1")
     ],
     targets: [
         .target(
@@ -31,7 +31,7 @@ let package = Package(
                 .define("DEBUG", .when(configuration: .debug))
             ],
             plugins: [
-                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")
             ]
         ),
         .testTarget(
@@ -41,7 +41,7 @@ let package = Package(
             ],
             path: "CUIKitTests",
             plugins: [
-                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")
             ]
         )
     ],

@@ -40,7 +40,7 @@ open class PlaceholderTextView: UITextView {
     }
 
     public var maxHeight: CGFloat = 150
-    public var imagePasteHandler : (() -> Void)?
+    public var imagePasteHandler: (() -> Void)?
 
     open override var intrinsicContentSize: CGSize {
         var size = super.intrinsicContentSize
