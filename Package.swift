@@ -18,7 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint", exact: "0.55.1")
+        .package(url: "https://github.com/realm/SwiftLint", exact: "0.59.1")
     ],
     targets: [
         .target(
